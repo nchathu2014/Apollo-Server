@@ -1,8 +1,7 @@
-const { products } = require("./../data/data");
-
 exports.Category = {
   products: (parent, args, context) => {
-    const { id, name } = parent;
+    const { products } = context;
+    const { id } = parent;
     return products.filter((product) => product.categoryId === id);
   },
 };

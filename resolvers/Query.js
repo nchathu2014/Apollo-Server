@@ -1,9 +1,8 @@
-const { products, categories } = require("./../data/data");
-
 exports.Query = {
   hello: () => "World!!!",
-  products: () => products,
+  products: (parent, args, context) => context.products,
   product: (parent, args, context) => {
+    const { products } = context;
     const { id } = args;
     const index = products.findIndex((product) => product.id === id);
     const product = products[index];
@@ -12,6 +11,7 @@ exports.Query = {
   },
   categories: () => categories,
   category: (parent, args, context) => {
+    const { categories } = context;
     const { id } = args;
     const index = categories.findIndex((category) => category.id === id);
     const category = categories[index];
