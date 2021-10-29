@@ -1,6 +1,16 @@
 exports.Query = {
   hello: () => "World!!!",
-  products: (parent, args, context) => context.products,
+  products: (parent, args, context) => {
+    const { filter } = args;
+    const { products } = context;
+
+    if (filter) {
+      const { onSale } = filter;
+      if (onSale) return products.filter((product) => product.onSale === true);
+    }
+
+    return products;
+  },
   product: (parent, args, context) => {
     const { products } = context;
     const { id } = args;
